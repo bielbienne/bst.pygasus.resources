@@ -35,6 +35,9 @@ setup(name='bb.extjs.resources',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'fanstatic',
+          'js.extjs'
+          
           # -*- Extra requirements: -*-
       ],
       entry_points="""

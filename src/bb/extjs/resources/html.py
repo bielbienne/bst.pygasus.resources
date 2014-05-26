@@ -11,10 +11,8 @@ class HtmlEntryPoint(extjs.MultiAdapter):
         load extjs framework with css and run the
         application.
     """
-    extjs.name('bb.extjs.core.htmlentrypoint')
+    extjs.name('index')
     extjs.adapts(IRequest, IResponse)
-    
-    target = '/'
     
     tmpl = loader.load('index.html')
     
@@ -25,4 +23,4 @@ class HtmlEntryPoint(extjs.MultiAdapter):
     def __call__(self):
         stream = self.tmpl.generate(links=None)
         self.response.mimetype='text/html'
-        self.response.set_data(stream.render('html', doctype='html'))
+        self.response.write(stream.render('html', doctype='html'))
