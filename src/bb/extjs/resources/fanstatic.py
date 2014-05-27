@@ -1,29 +1,26 @@
 import fanstatic
 
-from js import extjs as resource_extjs
+from js.extjs import extjs as resource_extjs
 
-from bb.extjs.core import extjs
-from bb.extjs.wsgi.interfaces import IRootDispatcher
+from bb.extjs.core import ext
 from bb.extjs.wsgi.interfaces import IRequest
-from bb.extjs.wsgi.interfaces import IResponse
+from bb.extjs.wsgi.interfaces import IRootDispatcher
+from bb.extjs.core.interfaces import IApplicationContext
 
 
-
-@extjs.implementer(IRootDispatcher)
-class FanstaticEntryPoint(extjs.MultiAdapter):
+@ext.implementer(IRootDispatcher)
+class FanstaticEntryPoint(ext.MultiAdapter):
     """ 
     """
-    extjs.name('fanstatic')
-    extjs.adapts(IRequest, IResponse)
+    ext.name('fanstatic')
+    ext.adapts(IApplicationContext, IRequest)
     
-    def __init__(self, request, response):
+    def __init__(self, context, request):
+        self.context = context
         self.request = request
-        self.response = response
     
     def __call__(self):
         
-        needed = fanstatic.init_needed()
-        resource_extjs.basic.need()
         library = fanstatic.get_library_registry()
         publisher = fanstatic.Publisher(library)
 
@@ -31,6 +28,12 @@ class FanstaticEntryPoint(extjs.MultiAdapter):
         # send it to original fanstatic publisher
         self.request.path_info_pop()
         response = publisher(self.request)
-        self.response.status=response.status
-        self.response.headerlist=response.headerlist
-        self.response.app_iter=response.app_iter
+        self.request.response.status=response.status
+        self.request.response.headerlist=response.headerlist
+        self.request.response.app_iter=response.app_iter
+
+
+@ext.subscribe(IApplicationContext, ext.IPreRequestProcessingEvent)
+def initalize_fanstatic(context, event):
+        needed = fanstatic.init_needed()
+        context.resources.need()
