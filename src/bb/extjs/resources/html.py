@@ -26,6 +26,17 @@ class HtmlEntryPoint(ext.MultiAdapter):
     
     def __call__(self):
         resources = fanstatic.get_needed()
-        stream = self.tmpl.generate(resources=Markup(resources.render()))
+        stream = self.tmpl.generate(resources=Markup(resources.render()),
+                                    launcher=Markup(self.launcher()))
         self.request.response.mimetype='text/html'
         self.request.response.write(stream.render('html', doctype='html'))
+        
+    def launcher(self):
+        """ create a js script that launch the application.
+        """
+        js = """
+            Ext.onReady(function() {
+                Ext.application('%s');
+            });
+        """
+        return js % self.context.application
