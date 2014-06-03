@@ -1,6 +1,6 @@
 import fanstatic
 from genshi.core import Markup
-from bb.extjs.core import ext
+from grokcore import component
 from bb.extjs.core.interfaces import IApplicationContext
 
 from bb.extjs.wsgi.interfaces import IRequest
@@ -9,14 +9,14 @@ from bb.extjs.wsgi.interfaces import IRootDispatcher
 from bb.extjs.resources import loader
 
 
-@ext.implementer(IRootDispatcher)
-class HtmlEntryPoint(ext.MultiAdapter):
+@component.implementer(IRootDispatcher)
+class HtmlEntryPoint(component.MultiAdapter):
     """ generate a index html. This html site will than
         load extjs framework with css and run the
         application.
     """
-    ext.name('index')
-    ext.adapts(IApplicationContext, IRequest)
+    component.name('index')
+    component.adapts(IApplicationContext, IRequest)
     
     tmpl = loader.load('index.html')
     

@@ -2,18 +2,19 @@ import fanstatic
 
 from js.extjs import extjs as resource_extjs
 
-from bb.extjs.core import ext
+from grokcore import component
 from bb.extjs.wsgi.interfaces import IRequest
 from bb.extjs.wsgi.interfaces import IRootDispatcher
+from bb.extjs.wsgi.events import IPreRequestProcessingEvent
 from bb.extjs.core.interfaces import IApplicationContext
 
 
-@ext.implementer(IRootDispatcher)
-class FanstaticEntryPoint(ext.MultiAdapter):
+@component.implementer(IRootDispatcher)
+class FanstaticEntryPoint(component.MultiAdapter):
     """ 
     """
-    ext.name('fanstatic')
-    ext.adapts(IApplicationContext, IRequest)
+    component.name('fanstatic')
+    component.adapts(IApplicationContext, IRequest)
     
     def __init__(self, context, request):
         self.context = context
@@ -33,7 +34,7 @@ class FanstaticEntryPoint(ext.MultiAdapter):
         self.request.response.app_iter=response.app_iter
 
 
-@ext.subscribe(IApplicationContext, ext.IPreRequestProcessingEvent)
+@component.subscribe(IApplicationContext, IPreRequestProcessingEvent)
 def initalize_fanstatic(context, event):
-        needed = fanstatic.init_needed()
+        needed = fanstatic.init_needed(debug=True)
         context.resources.need()
