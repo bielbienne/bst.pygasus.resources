@@ -27,6 +27,7 @@ class HtmlEntryPoint(component.MultiAdapter):
     def __call__(self):
         resources = fanstatic.get_needed()
         stream = self.tmpl.generate(resources=Markup(resources.render()),
+                                    title=self.context.title,
                                     launcher=Markup(self.launcher()))
         self.request.response.mimetype='text/html'
         self.request.response.write(stream.render('html', doctype='html'))

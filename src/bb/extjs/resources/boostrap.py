@@ -25,11 +25,16 @@ class BootstrapEntryPoint(component.MultiAdapter):
         self.request.response.write("""
         Ext.Loader.addClassPathMappings({
           "Ext": "fanstatic/extjs/src/",
-          "bielbienne.iptt.store": "scaffolding/store",
-          "bielbienne.iptt.model": "scaffolding/model",
-          "bielbienne.iptt.form": "scaffolding/form",
-          "bielbienne.iptt.grid": "scaffolding/grid",
-          "bielbienne.iptt.editgrid": "scaffolding/editgrid"
+          "bielbienne.iptt.store": "fanstatic/iptt/store",
+          "bielbienne.iptt.model": "fanstatic/iptt/model",
+          "bielbienne.iptt.view": "fanstatic/iptt/view",
+          "bielbienne.iptt.controller": "fanstatic/iptt/controller",
+
+          "scaffolding.store": "scaffolding/store",
+          "scaffolding.model": "scaffolding/model",
+          "scaffolding.form": "scaffolding/form",
+          "scaffolding.grid": "scaffolding/grid",
+          "scaffolding.editgrid": "scaffolding/editgrid"
 
         });
 

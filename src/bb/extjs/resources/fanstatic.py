@@ -36,5 +36,5 @@ class FanstaticEntryPoint(component.MultiAdapter):
 
 @component.subscribe(IApplicationContext, IPreRequestProcessingEvent)
 def initalize_fanstatic(context, event):
-        needed = fanstatic.init_needed(debug=False)
+        needed = fanstatic.init_needed(debug=True)
         context.resources.need()
