@@ -3,9 +3,12 @@ import fanstatic
 from js.extjs import extjs as resource_extjs
 
 from grokcore import component
+
 from bb.extjs.wsgi.interfaces import IRequest
 from bb.extjs.wsgi.interfaces import IRootDispatcher
 from bb.extjs.wsgi.events import IPreRequestProcessingEvent
+
+from bb.extjs.core.interfaces import IBaseUrl
 from bb.extjs.core.interfaces import IApplicationContext
 
 
@@ -36,5 +39,6 @@ class FanstaticEntryPoint(component.MultiAdapter):
 
 @component.subscribe(IApplicationContext, IPreRequestProcessingEvent)
 def initalize_fanstatic(context, event):
-        needed = fanstatic.init_needed(base_url=event.request.host_url, debug=True)
+        base_url = IBaseUrl(event.request).url()
+        needed = fanstatic.init_needed(base_url=base_url, debug=True)
         context.resources.need()
