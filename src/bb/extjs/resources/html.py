@@ -23,7 +23,7 @@ class HtmlEntryPoint(component.MultiAdapter):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-    
+
     def __call__(self):
         resources = fanstatic.get_needed()
         stream = self.tmpl.generate(resources=Markup(resources.render()),
@@ -31,7 +31,7 @@ class HtmlEntryPoint(component.MultiAdapter):
                                     launcher=Markup(self.launcher()))
         self.request.response.mimetype='text/html'
         self.request.response.write(stream.render('html', doctype='html'))
-        
+
     def launcher(self):
         """ create a js script that launch the application.
         """
