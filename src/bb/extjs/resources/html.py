@@ -17,9 +17,9 @@ class HtmlEntryPoint(component.MultiAdapter):
     """
     component.name('index')
     component.adapts(IApplicationContext, IRequest)
-    
+
     tmpl = loader.load('index.html')
-    
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -29,12 +29,13 @@ class HtmlEntryPoint(component.MultiAdapter):
         stream = self.tmpl.generate(resources=Markup(resources.render()),
                                     title=self.context.title,
                                     launcher=Markup(self.launcher()))
-        self.request.response.mimetype='text/html'
+        self.request.response.mimetype = 'text/html'
         self.request.response.write(stream.render('html', doctype='html'))
 
     def launcher(self):
         """ create a js script that launch the application.
         """
+
         js = """
             Ext.onReady(function() {
                 Ext.application('%s');

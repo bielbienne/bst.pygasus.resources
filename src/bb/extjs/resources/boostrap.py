@@ -25,23 +25,18 @@ class BootstrapEntryPoint(component.MultiAdapter):
     """
     component.name('bootstrap')
     component.adapts(IApplicationContext, IRequest)
-    
-    
-    
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
-    
+
     def __call__(self):
-        self.request.response.content_type='application/javascript'
-        
+        self.request.response.content_type = 'application/javascript'
+
         mapping = dict()
         for mapper in subscribers((self.context,), IClassPathMapping):
             mapping[mapper.namespace] = IBaseUrl(self.request).url(mapper.path)
-        
-        out = json.dumps(mapping, indent=' '*4)
+
+        out = json.dumps(mapping, indent=' ' * 4)
         self.request.response.write(CLASS_PATH_MAPPER % out)
-        self.request.response.content_type='application/javascript'
-
-
-
+        self.request.response.content_type = 'application/javascript'
