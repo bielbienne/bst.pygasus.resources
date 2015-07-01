@@ -6,13 +6,13 @@ from zope.component import subscribers
 
 from grokcore import component
 
-from bb.extjs.core.interfaces import IBaseUrl
-from bb.extjs.core.interfaces import IApplicationContext
+from bst.pygasus.core.interfaces import IBaseUrl
+from bst.pygasus.core.interfaces import IApplicationContext
 
-from bb.extjs.wsgi.interfaces import IRequest
-from bb.extjs.wsgi.interfaces import IRootDispatcher
+from bst.pygasus.wsgi.interfaces import IRequest
+from bst.pygasus.wsgi.interfaces import IRootDispatcher
 
-from bb.extjs.resources.interfaces import IClassPathMapping
+from bst.pygasus.resources.interfaces import IClassPathMapping
 
 
 CLASS_PATH_MAPPER = 'Ext.Loader.addClassPathMappings(%s);'

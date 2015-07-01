@@ -4,12 +4,12 @@ from js.extjs import extjs as resource_extjs
 
 from grokcore import component
 
-from bb.extjs.wsgi.interfaces import IRequest
-from bb.extjs.wsgi.interfaces import IRootDispatcher
-from bb.extjs.wsgi.events import IPreRequestProcessingEvent
+from bst.pygasus.wsgi.interfaces import IRequest
+from bst.pygasus.wsgi.interfaces import IRootDispatcher
+from bst.pygasus.wsgi.events import IPreRequestProcessingEvent
 
-from bb.extjs.core.interfaces import IBaseUrl
-from bb.extjs.core.interfaces import IApplicationContext
+from bst.pygasus.core.interfaces import IBaseUrl
+from bst.pygasus.core.interfaces import IApplicationContext
 
 
 @component.implementer(IRootDispatcher)

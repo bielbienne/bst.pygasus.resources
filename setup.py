@@ -14,7 +14,7 @@ long_description = (
     open('CHANGES.txt').read()
     + '\n')
 
-setup(name='bb.extjs.resources',
+setup(name='bst.pygasus.resources',
       version=version,
       description="",
       long_description=long_description,
@@ -30,7 +30,7 @@ setup(name='bb.extjs.resources',
       license='gpl',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      namespace_packages=['bb', 'bb.extjs'],
+      namespace_packages=['bb', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
